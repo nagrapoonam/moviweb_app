@@ -1,0 +1,26 @@
+<!-- update_movie.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Movie - MovieWeb App</title>
+</head>
+<body>
+    <h1>Update Movie</h1>
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+    <form method="POST" action="{{ url_for('update_movie', user_id=user_id, movie_id=movie_id) }}">
+        <label for="director">Director:</label>
+        <input type="text" id="director" name="director" value="{{ movie['director'] }}" required>
+        <br>
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" value="{{ movie['year'] }}" required>
+        <br>
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" step="0.1" value="{{ movie['rating'] }}" required>
+        <br>
+        <input type="submit" value="Update Movie">
+    </form>
+</body>
+</html>

@@ -1,0 +1,92 @@
+{
+    "1": {
+        "name": "Alice",
+        "movies": {
+            "1": {
+                "name": "Movie 1",
+                "director": "director 12",
+                "year": "2022",
+                "rating": "9.5"
+            },
+            "2": {
+                "name": "Movie 2",
+                "director": "Director 2",
+                "year": 2015,
+                "rating": 8.2
+            },
+            "3": {
+                "name": "Movie 5",
+                "director": "New Director",
+                "year": 2010,
+                "rating": 8.5
+            },
+            "4": {
+                "name": "Movie 8",
+                "director": "Director 8",
+                "year": 2023,
+                "rating": 8.9
+            },
+            "5": {
+                "name": "titanic",
+                "director": "James Cameron",
+                "year": "1997",
+                "rating": "7.9"
+            }
+        }
+    },
+    "2": {
+        "name": "Bob",
+        "movies": {
+            "2": {
+                "name": "Movie 4",
+                "director": "Director 4",
+                "year": 2020,
+                "rating": 7.8
+            },
+            "3": {
+                "name": "movie 9",
+                "director": "director 10",
+                "year": "2016",
+                "rating": "2.5"
+            }
+        }
+    },
+    "3": {
+        "name": "John",
+        "movies": {
+            "1": {
+                "name": "Movie 9",
+                "director": "Director 8",
+                "year": 2023,
+                "rating": 8.9
+            },
+            "2": {
+                "name": "Movie 9",
+                "director": "Director 8",
+                "year": 2023,
+                "rating": 8.9
+            },
+            "3": {
+                "name": "Movie 9",
+                "director": "Director 8",
+                "year": 2023,
+                "rating": 8.9
+            }
+        }
+    },
+    "4": {
+        "name": "abc",
+        "movies": {
+            "1": {
+                "name": "movie 9",
+                "director": "director 10",
+                "year": "2015",
+                "rating": "2.5"
+            }
+        }
+    },
+    "5": {
+        "name": "xyz",
+        "movies": {}
+    }
+}
