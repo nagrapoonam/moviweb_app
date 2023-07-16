@@ -1,9 +1,31 @@
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+# from werkzeug.security import generate_password_hash, check_password_hash
 from datamanager.json_data_manager import JSONDataManager
-from flask import Flask, render_template, request, redirect, url_for
+
 
 app = Flask(__name__)
-data_manager = JSONDataManager(
-    'data/movies.json')  # Use the appropriate path to your JSON file
+app.config['SECRET_KEY'] = 'your_secret_key_here'
+
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+
+data_manager = JSONDataManager('data/movies.json')
+
+
+class User(UserMixin):
+    def __init__(self, id, username, password):
+        self.id = id
+        self.username = username
+        self.password = password
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    user_data = data_manager.get_user_by_username(user_id)  # Retrieve user by username
+    if user_data:
+        return User(user_data['username'], user_data['username'], user_data['password'])  # Use username as user ID
+    return None
 
 
 @app.route('/')
@@ -11,68 +33,112 @@ def home():
     return render_template('index.html')
 
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        message = data_manager.add_user(username, password)
+
+        if message.startswith('User'):
+            flash('Registration successful. Please log in.')
+            return redirect(url_for('login'))
+        else:
+            flash(message, 'error')
+
+    return render_template('register.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('list_movies', user_id=current_user.id))
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        user = data_manager.get_user_by_username(username)
+
+        if user and user['password'] == password:
+            login_user(User(user['id'], username, user['password']))
+            flash('Login successful.')
+            return redirect(url_for('list_movies', user_id=user['id']))
+
+        flash('Invalid username or password.')
+
+    return render_template('login.html')
+
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out.')
+    return redirect(url_for('home'))
+
+
 @app.route('/users')
+@login_required
 def list_users():
     users = data_manager.get_all_users()
     return render_template('users.html', users=users)
 
 
 @app.route('/users/<int:user_id>')
+@login_required
 def list_movies(user_id):
-    movies = data_manager.get_user_movies(user_id)
-    return render_template('movies.html', movies=movies)
+    if current_user.id != user_id:
+        flash('You are not authorized to view this page.', 'error')
+        return redirect(url_for('home'))
 
-
-@app.route('/add_user', methods=['GET', 'POST'])
-def add_user():
-    if request.method == 'POST':
-        user_name = request.form['user_name']
-        message = data_manager.add_user(user_name)
-        return render_template('add_user.html', message=message)
-    return render_template('add_user.html')
+    user = data_manager.get_user(user_id)
+    if user:
+        movies = data_manager.get_user_movies(user_id)
+        return render_template('list_movies.html', movies=movies)
+    else:
+        flash(f"User with ID {user_id} not found.", 'error')
+        return redirect(url_for('home'))
 
 
 @app.route('/users/<int:user_id>/add_movie', methods=['GET', 'POST'])
+@login_required
 def add_movie(user_id):
     if request.method == 'POST':
         movie_name = request.form['movie_name']
         message = data_manager.add_movie(user_id, movie_name)
-        return render_template('add_movie.html', user_id=user_id,
-                               message=message)
+        flash(message)
+        return redirect(url_for('list_movies', user_id=user_id))
     return render_template('add_movie.html', user_id=user_id)
 
 
-@app.route('/users/<int:user_id>/update_movie/<int:movie_id>',
-           methods=['GET', 'POST'])
+@app.route('/users/<int:user_id>/update_movie/<int:movie_id>', methods=['GET', 'POST'])
+@login_required
 def update_movie(user_id, movie_id):
     if request.method == 'POST':
         director = request.form.get('director')
         year = request.form.get('year')
         rating = request.form.get('rating')
 
-        result = data_manager.update_movie(user_id, movie_id, director, year,
-                                           rating)
-        return result
+        result = data_manager.update_movie(user_id, movie_id, director, year, rating)
+        flash(result)
+        return redirect(url_for('list_movies', user_id=user_id))
     else:
-        # Retrieve movie information from the database or JSON file
-        # Implement your logic here
-        movie = data_manager.get_movie(user_id,
-                                       movie_id)  # Replace with your logic to retrieve movie info
-
+        movie = data_manager.get_movie(user_id, movie_id)
         if movie:
-            return render_template('update_movie.html', user_id=user_id,
-                                   movie_id=movie_id, movie=movie)
+            return render_template('update_movie.html', user_id=user_id, movie_id=movie_id, movie=movie)
         else:
-            movie_name = data_manager.get_movie_name(
-                movie_id)  # Replace with your logic to retrieve movie name
-            user_name = data_manager.get_user_name(
-                user_id)  # Replace with your logic to retrieve user name
-            return f"Movie '{movie_name}' not found for user '{user_name}'."
+            flash(f"Movie not found for user with ID {user_id}.", 'error')
+            return redirect(url_for('list_movies', user_id=user_id))
 
 
 @app.route('/users/<int:user_id>/delete_movie/<int:movie_id>')
+@login_required
 def delete_movie(user_id, movie_id):
     message = data_manager.delete_movie(user_id, movie_id)
+    flash(message)
     return redirect(url_for('list_movies', user_id=user_id))
 
 
@@ -80,10 +146,10 @@ def delete_movie(user_id, movie_id):
 def page_not_found(e):
     return render_template('404.html'), 404
 
+
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template('500.html'), 500
-
 
 
 if __name__ == '__main__':

@@ -1,0 +1,110 @@
+    * {
+    margin : 0;
+    padding : 0;
+    box-sizing : border-box;
+}
+
+body{
+    background: #e1e8e3;
+    background-size: cover;
+    background-position:center;
+    font-family: sans-serif;
+}
+
+.navbar{
+    background: rgb(0,0,0);
+    text-align : center;
+}
+
+nav{
+    width:100%;
+    overflow: auto;
+    background:black;
+}
+
+
+.logo img {
+    position:absolute;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.fa-solid {
+    color: white;
+}
+
+.fa-magnifying-glass{
+    margin-left: 1000px;
+}
+
+.fa-user{
+    margin-right: 50px;
+}
+
+/*-------- Carousel---------*/
+
+
+.carousel-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.carousel-slide {
+  flex-shrink: 0;
+  width: 300px;
+  height: 450px;
+  margin-right: 10px;
+  scroll-snap-align: start;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-slide img {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.random-movies-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.movie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.movie img {
+  width: 150px;
+  height: 225px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.movie-title {
+  margin-top: 10px;
+  font-weight: bold;
+}

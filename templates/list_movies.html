@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to MovieWeb App</title>
+    <title>Movies - List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
@@ -31,15 +31,27 @@
     <i class="fa-solid fa-user"></i>
 </nav>
 
-    <div class="carousel-container">
-  <div class="carousel"></div>
-</div>
 
-<div class="random-movies-container">
-  <h2>Random Movies</h2>
-  <div class="movie-grid"></div>
-</div>
 
-<script src="script.js"></script>
+<h1>Movie List</h1>
+    {% if movies %}
+        <ul>
+            {% for movie in movies %}
+                <li>
+                    <h2>{{ movie.name }}</h2>
+                    <p>Director: {{ movie.director }}</p>
+                    <p>Year: {{ movie.year }}</p>
+                    <p>Rating: {{ movie.rating }}</p>
+                    <img src="{{ movie.poster }}" alt="{{ movie.name }} Poster">
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No movies found.</p>
+    {% endif %}
+    <a href="{{ url_for('home') }}">Go Back</a>
+
 </body>
 </html>
+
+

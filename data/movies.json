@@ -1,92 +1,155 @@
 {
     "1": {
         "name": "Alice",
+        "username": "Alice",
+        "password": "123",
         "movies": {
             "1": {
-                "name": "Movie 1",
-                "director": "director 12",
-                "year": "2022",
-                "rating": "9.5"
+                "name": "Silo",
+                "director": "N/A",
+                "year": "2023\u2013",
+                "rating": "8.1",
+                "poster": "https://m.media-amazon.com/images/M/MV5BNTk3MGJkZGItNzRjYy00MDhiLWExMjUtOWU2Njc3YWRmOWE3XkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_SX300.jpg"
             },
             "2": {
-                "name": "Movie 2",
-                "director": "Director 2",
-                "year": 2015,
-                "rating": 8.2
+                "name": "the witcher",
+                "director": "Tomek Baginski",
+                "year": "2019\u2013",
+                "rating": "8.1",
+                "poster": "https://m.media-amazon.com/images/M/MV5BMDEwOWVlY2EtMWI0ZC00OWVmLWJmZGItYTk3YjYzN2Y0YmFkXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_SX300.jpg"
             },
             "3": {
-                "name": "Movie 5",
-                "director": "New Director",
-                "year": 2010,
-                "rating": 8.5
+                "name": "Nimona",
+                "director": "Nick Bruno, Troy Quane",
+                "year": "2023",
+                "rating": "7.7",
+                "poster": "https://m.media-amazon.com/images/M/MV5BYWQ2YzJhOGItNTMyOC00YzFmLWExZjEtOGFmMDVkMDdmOGFiXkEyXkFqcGdeQXVyMTUxNTU1NzEz._V1_SX300.jpg"
             },
             "4": {
-                "name": "Movie 8",
-                "director": "Director 8",
-                "year": 2023,
-                "rating": 8.9
+                "name": "avatar",
+                "director": "James Cameron",
+                "year": "2009",
+                "rating": "7.9",
+                "poster": "https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg"
             },
             "5": {
-                "name": "titanic",
-                "director": "James Cameron",
-                "year": "1997",
-                "rating": "7.9"
+                "name": "interstellar",
+                "director": "Christopher Nolan",
+                "year": "2014",
+                "rating": "8.7",
+                "poster": "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
+            },
+            "6": {
+                "name": "Air",
+                "director": "Ben Affleck",
+                "year": "2023",
+                "rating": "7.5",
+                "poster": "https://m.media-amazon.com/images/M/MV5BYmNlOTNlYjUtM2U3Yy00M2ZjLTkxZDQtN2NiNGZiZDI0ZjE3XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_SX300.jpg"
             }
         }
     },
     "2": {
         "name": "Bob",
+        "username": "Bob",
+        "password": "456",
         "movies": {
+            "1": {
+                "name": "Sound Of Freedom",
+                "director": "Alejandro Monteverde",
+                "year": "2022",
+                "rating": "8.4",
+                "poster": "https://m.media-amazon.com/images/M/MV5BNTAwNWQ1ZjQtZDFmMC00YjNlLWFlNjItMjJlYzZkMjJlNzkyXkEyXkFqcGdeQXVyNzc0MTgzMzU@._V1_SX300.jpg"
+            },
             "2": {
-                "name": "Movie 4",
-                "director": "Director 4",
-                "year": 2020,
-                "rating": 7.8
+                "name": "Black Mirror",
+                "director": "N/A",
+                "year": "2011\u2013",
+                "rating": "8.8",
+                "poster": "https://m.media-amazon.com/images/M/MV5BZTgyNTBkNzctN2I3NC00NTA1LWJiMDMtYzA2MmYyZjc1NWQzXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_SX300.jpg"
             },
             "3": {
-                "name": "movie 9",
-                "director": "director 10",
-                "year": "2016",
-                "rating": "2.5"
+                "name": "Blue Beetle",
+                "director": "Angel Manuel Soto",
+                "year": "2023",
+                "rating": "N/A",
+                "poster": "https://m.media-amazon.com/images/M/MV5BNjM5YmY5OGQtNTE3OS00Yzc0LWEzOTEtNTJjY2MxMWZlMjU2XkEyXkFqcGdeQXVyMTUzMDA3Mjc2._V1_SX300.jpg"
             }
         }
     },
     "3": {
         "name": "John",
+        "username": "John",
+        "password": "789",
         "movies": {
             "1": {
-                "name": "Movie 9",
-                "director": "Director 8",
-                "year": 2023,
-                "rating": 8.9
+                "name": "titanic",
+                "director": "James Cameron",
+                "year": "1997",
+                "rating": "7.9",
+                "poster": "https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
             },
             "2": {
-                "name": "Movie 9",
-                "director": "Director 8",
-                "year": 2023,
-                "rating": 8.9
+                "name": "The Flash",
+                "director": "N/A",
+                "year": "2014\u20132023",
+                "rating": "7.5",
+                "poster": "https://m.media-amazon.com/images/M/MV5BZDcwMzU4NWYtODIzZi00Yzg4LWJhOTAtOTQ2ZDA4NmFlYmFlXkEyXkFqcGdeQXVyMTY1MTU3NDY5._V1_SX300.jpg"
             },
             "3": {
-                "name": "Movie 9",
-                "director": "Director 8",
-                "year": 2023,
-                "rating": 8.9
+                "name": "Extraction II",
+                "director": "Sam Hargrave",
+                "year": "2023",
+                "rating": "7.1",
+                "poster": "https://m.media-amazon.com/images/M/MV5BZjg5MTM4N2QtN2RlMS00NzBlLTg3NDktM2ExZDNmMmExMGU3XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SX300.jpg"
             }
         }
     },
     "4": {
         "name": "abc",
+        "username": "abc",
+        "password": "xyz",
         "movies": {
             "1": {
-                "name": "movie 9",
-                "director": "director 10",
-                "year": "2015",
-                "rating": "2.5"
+                "name": "Yellowstone",
+                "director": "N/A",
+                "year": "2018\u20132023",
+                "rating": "8.7",
+                "poster": "https://m.media-amazon.com/images/M/MV5BOGFiZjU5NGEtNTAwNS00ZjI2LTg0YTktNjg0ODFlM2E0NGVhXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg"
+            },
+            "2": {
+                "name": "The Boys",
+                "director": "N/A",
+                "year": "2019\u2013",
+                "rating": "8.7",
+                "poster": "https://m.media-amazon.com/images/M/MV5BOTEyNDJhMDAtY2U5ZS00OTMzLTkwODktMjU3MjFkZWVlMGYyXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_SX300.jpg"
             }
         }
     },
     "5": {
         "name": "xyz",
+        "username": "abc",
+        "password": "abc",
+        "movies": {
+            "1": {
+                "name": "The Covenant",
+                "director": "Guy Ritchie",
+                "year": "2023",
+                "rating": "7.5",
+                "poster": "https://m.media-amazon.com/images/M/MV5BNmQzOWZhOTMtZTcxNC00MTdkLWEwYmUtOWVmOTFhNTdkNjRkXkEyXkFqcGdeQXVyODk2NDQ3MTA@._V1_SX300.jpg"
+            },
+            "2": {
+                "name": "Barbie",
+                "director": "Sang-woo Lee",
+                "year": "2011",
+                "rating": "6.7",
+                "poster": "https://m.media-amazon.com/images/M/MV5BYmRhMTRmM2QtMzRlNC00MzJjLTljMzYtNmY0MzMzZmZlMmE0XkEyXkFqcGdeQXVyMjAzMjcxNTE@._V1_SX300.jpg"
+            }
+        }
+    },
+    "6": {
+        "name": "sean",
+        "username": "sean",
+        "password": "brown",
         "movies": {}
     }
 }

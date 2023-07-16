@@ -1,11 +1,10 @@
 import json
-
 import requests
+# from werkzeug.security import generate_password_hash
+from datamanager.data_manager_interface import DataManagerInterface
+# from data_manager_interface import DataManagerInterface
 
-from .data_manager_interface import DataManagerInterface
-
-
-class JSONDataManager(DataManagerInterface):
+class JSONDataManager:
     def __init__(self, filename):
         self.filename = filename
 
@@ -18,18 +17,20 @@ class JSONDataManager(DataManagerInterface):
                     user = {
                         'id': user_id,
                         'name': user_info['name'],
+                        'username': user_info['username'],  # Include the 'username' key
+                        'password': user_info['password'],
                         'movies': user_info['movies']
                     }
                     users.append(user)
                 return users
         except IOError as e:
-            # Handle the IOError exception (e.g., log the error, return an error message, etc.)
+            # Handle the IOError exception
             # ...
             return []
 
     def get_user_movies(self, user_id):
         try:
-            with open(self.filename) as json_file:
+            with open(self.filename, "r") as json_file:
                 data = json.load(json_file)
                 user_info = data.get(str(user_id))
                 if user_info:
@@ -52,31 +53,32 @@ class JSONDataManager(DataManagerInterface):
 
         return []
 
-    def add_user(self, user_name):
+    def add_user(self, username, password):
         try:
             with open(self.filename, "r+") as json_file:
                 data = json.load(json_file)
                 user_ids = list(data.keys())
                 new_user_id = str(int(max(user_ids)) + 1) if user_ids else '1'
                 for user_info in data.values():
-                    if user_info['name'] == user_name:
-                        return f"Username '{user_name}' already exists. Please choose a different username."
+                    if user_info.get('username') == username:
+                        return f"Username '{username}' already exists. Please choose a different username."
+                hashed_password = generate_password_hash(password)
                 data[new_user_id] = {
-                    'name': user_name,
+                    'name': username,
+                    'username': username,
+                    'password': hashed_password,
                     'movies': {}
                 }
                 json_file.seek(0)
                 json.dump(data, json_file, indent=4)
                 json_file.truncate()
-                return f"User '{user_name}' added successfully."
+                return f"User '{username}' added successfully with ID {new_user_id}."
         except IOError as e:
-            # Handle the IOError exception
-            # ...
-            return f"An error occurred while adding a user."
+            return f"An error occurred while adding a user"
 
     def add_movie(self, user_id, movie_name):
         try:
-            api_url = f"http://www.omdbapi.com/?apikey=4bf81bd7&t={movie_name}"
+            api_url = f"http://www.omdbapi.com/?apikey=4bf81bd7&t&t={movie_name}"
             response = requests.get(api_url)
             movie_data = response.json()
 
@@ -87,7 +89,8 @@ class JSONDataManager(DataManagerInterface):
                 'name': movie_name,
                 'director': movie_data.get("Director"),
                 'year': movie_data.get("Year"),
-                'rating': movie_data.get("imdbRating")
+                'rating': movie_data.get("imdbRating"),
+                'poster': movie_data.get("Poster")
             }
 
             user_id = str(user_id)
@@ -103,11 +106,11 @@ class JSONDataManager(DataManagerInterface):
                     json.dump(data, json_file, indent=4)
                     json_file.truncate()
 
-                    return f"Movie '{movie_name}' added for user {self.get_user_name(user_id)} successfully."
+                    return f"Movie '{movie_name}' added for user {user_info['name']} successfully."
 
             return f"User with ID {user_id} not found."
         except requests.RequestException as e:
-            # Handle the RequestException (e.g., log the error, return an error message, etc.)
+            # Handle the RequestException
             # ...
             return f"An error occurred while adding the movie."
 
@@ -133,9 +136,9 @@ class JSONDataManager(DataManagerInterface):
                         json_file.truncate()
                         return f"Movie '{movie['name']}' updated for user '{user_info['name']}' successfully."
 
-                    return f"Movie '{self.get_movie_name(movie_id)}' not found for user '{self.get_user_name(user_id)}'."
+                    return f"Movie not found for user '{user_info['name']}'."
 
-                return f"User with ID '{self.get_user_name(user_id)}' not found."
+                return f"User with ID '{user_id}' not found."
         except IOError as e:
             # Handle the IOError exception
             # ...
@@ -165,6 +168,30 @@ class JSONDataManager(DataManagerInterface):
             # ...
             return f"An error occurred while deleting the movie."
 
+    def get_user(self, user_id):
+        try:
+            user_id = str(user_id)
+
+            with open(self.filename, "r") as json_file:
+                data = json.load(json_file)
+                return data.get(user_id)
+        except IOError as e:
+            # Handle the IOError exception
+            # ...
+            return None
+
+    def get_user_by_username(self, username):
+        try:
+            with open(self.filename, "r") as json_file:
+                data = json.load(json_file)
+                for user_id, user_info in data.items():
+                    if user_info.get('username') == username:
+                        return {'id': user_id, **user_info}
+        except IOError as e:
+            # Handle the IOError exception
+            # ...
+            return None
+
     def get_movie(self, user_id, movie_id):
         try:
             user_id = str(user_id)
@@ -189,10 +216,5 @@ class JSONDataManager(DataManagerInterface):
             # ...
             return None
 
-    def get_movie_name(self, movie_id):
-        # Replace with your logic to retrieve movie name based on movie ID
-        return f"Movie Name for ID {movie_id}"
 
-    def get_user_name(self, user_id):
-        # Replace with your logic to retrieve user name based on user ID
-        return f"User Name for ID {user_id}"
+
