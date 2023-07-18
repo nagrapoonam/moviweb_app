@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, get_flashed_messages
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-# from werkzeug.security import generate_password_hash, check_password_hash
 from datamanager.json_data_manager import JSONDataManager
+import requests
 
 
 app = Flask(__name__)
@@ -9,6 +9,7 @@ app.config['SECRET_KEY'] = 'your_secret_key_here'
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+
 
 data_manager = JSONDataManager('data/movies.json')
 
@@ -22,15 +23,18 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
-    user_data = data_manager.get_user_by_username(user_id)  # Retrieve user by username
+    user_data = data_manager.get_user(user_id)  # Retrieve user by ID
     if user_data:
-        return User(user_data['username'], user_data['username'], user_data['password'])  # Use username as user ID
+        return User(user_id, user_data['username'], user_data['password'])
     return None
+
+
 
 
 @app.route('/')
 def home():
     return render_template('index.html')
+
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -87,19 +91,16 @@ def list_users():
     return render_template('users.html', users=users)
 
 
-@app.route('/users/<int:user_id>')
+@app.route('/users/<int:user_id>/list_movies')
 @login_required
 def list_movies(user_id):
-    if current_user.id != user_id:
-        flash('You are not authorized to view this page.', 'error')
-        return redirect(url_for('home'))
-
     user = data_manager.get_user(user_id)
+    flash_message = request.args.get('flash_message')
     if user:
-        movies = data_manager.get_user_movies(user_id)
-        return render_template('list_movies.html', movies=movies)
+        movies = user.get('movies', {})
+        return render_template('list_movies.html', movies=movies, user_id=user_id, flash_message=flash_message)
     else:
-        flash(f"User with ID {user_id} not found.", 'error')
+        flash('User not found.')
         return redirect(url_for('home'))
 
 
@@ -109,8 +110,8 @@ def add_movie(user_id):
     if request.method == 'POST':
         movie_name = request.form['movie_name']
         message = data_manager.add_movie(user_id, movie_name)
-        flash(message)
-        return redirect(url_for('list_movies', user_id=user_id))
+        return redirect(url_for('list_movies', user_id=user_id, flash_message=message))
+
     return render_template('add_movie.html', user_id=user_id)
 
 
@@ -123,8 +124,7 @@ def update_movie(user_id, movie_id):
         rating = request.form.get('rating')
 
         result = data_manager.update_movie(user_id, movie_id, director, year, rating)
-        flash(result)
-        return redirect(url_for('list_movies', user_id=user_id))
+        return redirect(url_for('list_movies', user_id=user_id, flash_message=result))
     else:
         movie = data_manager.get_movie(user_id, movie_id)
         if movie:
@@ -133,13 +133,12 @@ def update_movie(user_id, movie_id):
             flash(f"Movie not found for user with ID {user_id}.", 'error')
             return redirect(url_for('list_movies', user_id=user_id))
 
-
 @app.route('/users/<int:user_id>/delete_movie/<int:movie_id>')
 @login_required
 def delete_movie(user_id, movie_id):
     message = data_manager.delete_movie(user_id, movie_id)
-    flash(message)
-    return redirect(url_for('list_movies', user_id=user_id))
+    return redirect(url_for('list_movies', user_id=user_id, flash_message=message))
+
 
 
 @app.errorhandler(404)

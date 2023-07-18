@@ -1,8 +1,7 @@
 import json
 import requests
-# from werkzeug.security import generate_password_hash
 from datamanager.data_manager_interface import DataManagerInterface
-# from data_manager_interface import DataManagerInterface
+
 
 class JSONDataManager:
     def __init__(self, filename):
@@ -46,12 +45,13 @@ class JSONDataManager:
                         }
                         movies.append(movie)
                     return movies
+                else:
+                    return []
         except IOError as e:
             # Handle the IOError exception
             # ...
             return []
 
-        return []
 
     def add_user(self, username, password):
         try:
@@ -62,11 +62,10 @@ class JSONDataManager:
                 for user_info in data.values():
                     if user_info.get('username') == username:
                         return f"Username '{username}' already exists. Please choose a different username."
-                hashed_password = generate_password_hash(password)
                 data[new_user_id] = {
                     'name': username,
                     'username': username,
-                    'password': hashed_password,
+                    'password': password,
                     'movies': {}
                 }
                 json_file.seek(0)
@@ -138,7 +137,7 @@ class JSONDataManager:
 
                     return f"Movie not found for user '{user_info['name']}'."
 
-                return f"User with ID '{user_id}' not found."
+                return f"User '{user_info['name']}' not found."
         except IOError as e:
             # Handle the IOError exception
             # ...
@@ -160,9 +159,9 @@ class JSONDataManager:
                         json_file.seek(0)
                         json.dump(data, json_file, indent=4)
                         json_file.truncate()
-                        return f"Movie '{movie['name']}' deleted for user with ID {user_id} successfully."
-                    return f"Movie not found for user with ID {user_id}."
-                return f"User with ID {user_id} not found."
+                        return f"Movie '{movie['name']}' deleted for user '{user_info['name']}' successfully."
+                    return f"Movie not found for user '{user_info['name']}'."
+                return f"User '{user_info['name']}' not found."
         except IOError as e:
             # Handle the IOError exception
             # ...

@@ -24,22 +24,22 @@
     <div class="nav">
         <a class="navbar-brand" href="#">
             <img class="image" src="{{ url_for('static', filename='/images/logo7.jpeg') }}">
-            <!--          <img src="{{ url_for('static', filename='/images/logo8.jpeg') }}" >-->
+
         </a>
     </div>
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <i class="fa-solid fa-user"></i>
+
+    <a href="{{ url_for('login') }}"><i class="fa-solid fa-user"></i></a>
 </nav>
 
-    <div class="carousel-container">
-  <div class="carousel"></div>
-</div>
+{% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
 
-<div class="random-movies-container">
-  <h2>Random Movies</h2>
-  <div class="movie-grid"></div>
-</div>
-
-<script src="script.js"></script>
 </body>
 </html>

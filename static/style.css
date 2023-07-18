@@ -9,9 +9,10 @@ body{
     background-size: cover;
     background-position:center;
     font-family: sans-serif;
+
 }
 
-.navbar{
+/*.navbar{
     background: rgb(0,0,0);
     text-align : center;
 }
@@ -20,7 +21,7 @@ nav{
     width:100%;
     overflow: auto;
     background:black;
-}
+}*/
 
 
 .logo img {
@@ -38,73 +39,60 @@ nav{
 }
 
 .fa-user{
-    margin-right: 50px;
+    margin-right: 100px;
 }
 
-/*-------- Carousel---------*/
 
 
-.carousel-container {
-  margin-top: 20px;
-  margin-bottom: 20px;
+
+/*-------- Drop Down Menu---------*/
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
 
-.carousel {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  background-color: #171110;
+  padding: 8px;
+  list-style: none;
 }
 
-.carousel-slide {
-  flex-shrink: 0;
-  width: 300px;
-  height: 450px;
-  margin-right: 10px;
-  scroll-snap-align: start;
-  background-color: #f2f2f2;
-  border-radius: 5px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
-.carousel-slide img {
-  width: 200px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 5px;
+.flash-message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    background-color: #f8f8f8;
+    color: #333;
 }
 
-.random-movies-container {
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
+
+.movie-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    list-style-type: none;
 }
 
-.movie-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+.movie-item {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border: 1px solid #ccc;
 }
 
-.movie {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+.movie-poster {
+    max-width: 100%;
+    height: auto;
 }
 
-.movie img {
-  width: 150px;
-  height: 225px;
-  object-fit: cover;
-  border-radius: 5px;
-}
 
-.movie-title {
-  margin-top: 10px;
-  font-weight: bold;
-}
+

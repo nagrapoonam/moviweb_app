@@ -22,36 +22,55 @@
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="nav">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
             <img class="image" src="{{ url_for('static', filename='/images/logo7.jpeg') }}">
-            <!--          <img src="{{ url_for('static', filename='/images/logo8.jpeg') }}" >-->
         </a>
     </div>
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <i class="fa-solid fa-user"></i>
+<!--    <i class="fa-solid fa-magnifying-glass"></i>-->
+    <div class="dropdown">
+        <i class="fa-solid fa-user"></i>
+        <ul class="dropdown-menu">
+<!--            <li><a href="{{ url_for('home') }}">Go Back</a></li>-->
+            <li><a href="{{ url_for('add_movie', user_id=user_id) }}">Add Movie</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>
 </nav>
 
-
-
 <h1>Movie List</h1>
-    {% if movies %}
-        <ul>
-            {% for movie in movies %}
-                <li>
-                    <h2>{{ movie.name }}</h2>
-                    <p>Director: {{ movie.director }}</p>
-                    <p>Year: {{ movie.year }}</p>
-                    <p>Rating: {{ movie.rating }}</p>
-                    <img src="{{ movie.poster }}" alt="{{ movie.name }} Poster">
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No movies found.</p>
-    {% endif %}
-    <a href="{{ url_for('home') }}">Go Back</a>
+
+{% if flash_message %}
+    <div class="flash-message">{{ flash_message }}</div>
+{% endif %}
+
+{% if movies %}
+    <ul class="movie-list">
+        {% for movie_id, movie in movies.items() %}
+            <li class="movie-item">
+                <h2>{{ movie.name }}</h2>
+                <p>Director: {{ movie.director }}</p>
+                <p>Year: {{ movie.year }}</p>
+                <p>Rating: {{ movie.rating }}</p>
+                <img class="movie-poster" src="{{ movie.poster }}" alt="{{ movie.name }} Poster">
+                <a href="{{ url_for('update_movie', user_id=user_id, movie_id=movie_id) }}">Update</a>
+                <a href="{{ url_for('delete_movie', user_id=user_id, movie_id=movie_id) }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No movies found.</p>
+{% endif %}
+
+   <script>
+        // Remove flash messages after 5 seconds
+        setTimeout(function() {
+            var flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                message.remove();
+            });
+        }, 5000);
+    </script>
+
 
 </body>
 </html>
-
-

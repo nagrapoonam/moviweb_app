@@ -22,13 +22,20 @@
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="nav">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
             <img class="image" src="{{ url_for('static', filename='/images/logo7.jpeg') }}">
-            <!--          <img src="{{ url_for('static', filename='/images/logo8.jpeg') }}" >-->
+<!--                      <img src="{{ url_for('static', filename='/images/logo8.jpeg') }}" >-->
         </a>
     </div>
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <i class="fa-solid fa-user"></i>
+<!--    <i class="fa-solid fa-magnifying-glass"></i>-->
+    <div class="dropdown">
+        <i class="fa-solid fa-user"></i>
+        <ul class="dropdown-menu">
+<!--            <li><a href="{{ url_for('home') }}">Go Back</a></li>-->
+            <li><a href="{{ url_for('list_movies', user_id=user_id) }}">Movie List</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>
 </nav>
 
     <h1>Update Movie</h1>
