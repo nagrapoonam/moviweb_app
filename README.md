@@ -7,8 +7,7 @@
 
 ###  A movie Web  application.
 
-pictures
-gif
+[video.mp4](..%2F..%2F..%2FDownloads%2Fvideo.mp4)
 
 
 ### Description
@@ -17,7 +16,8 @@ A movie web app built with Flask using the IMDB API with CRUD and user authentic
 ### Features
 Here are the features in summary:
 * App displays existing list of users with registration option.
-* User can login and use CRUD features
+* User can login and use CRUD features.
+* Canot access other user's list of movies.
 
 ## Technologies Used
 
