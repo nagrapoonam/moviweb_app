@@ -38,10 +38,19 @@
 </nav>
 
 <h1>Movie List</h1>
+    <!-- Flash Messages -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="flash-message">
+                    <div class="flash-message-content">{{ message }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
 
-{% if flash_message %}
-    <div class="flash-message">{{ flash_message }}</div>
-{% endif %}
 
 {% if movies %}
     <ul class="movie-list">

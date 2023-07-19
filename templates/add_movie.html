@@ -39,14 +39,16 @@
 
 <h1>Add Movie</h1>
 
+    <!-- Flash Messages -->
 {% with messages = get_flashed_messages() %}
     {% if messages %}
-<!--        <ul class="flashes">-->
+        <div class="flash-messages">
             {% for message in messages %}
-<!--                <li>{{ message }}</li>-->
-            <p>{{ message }}</p>
+                <div class="flash-message">
+                    <div class="flash-message-content">{{ message }}</div>
+                </div>
             {% endfor %}
-<!--        </ul>-->
+        </div>
     {% endif %}
 {% endwith %}
 

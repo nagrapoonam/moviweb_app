@@ -39,9 +39,24 @@
 </nav>
 
     <h1>Update Movie</h1>
-    {% if message %}
-    <p>{{ message }}</p>
+
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for message in messages %}
+                <div class="flash-message">
+                    <div class="flash-message-content">{{ message }}</div>
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
+{% endwith %}
+
+
+
+
     <form method="POST" action="{{ url_for('update_movie', user_id=user_id, movie_id=movie_id) }}">
         <label for="director">Director:</label>
         <input type="text" id="director" name="director" value="{{ movie['director'] }}" required>
