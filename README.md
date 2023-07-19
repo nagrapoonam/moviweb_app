@@ -3,12 +3,9 @@
 
 ### 🏠 [Homepage](https://github.com/nagrapoonam/moviweb_app)
 
-### ✨ [Demo](https://movie-app95.herokuapp.com/)
+### ✨ [Demo](http://devpy.pythonanywhere.com/)
 
 ###  A movie Web  application.
-
-[video.mp4](Preview%2Fvideo.mp4)
-
 
 ### Description
 A movie web app built with Flask using the IMDB API with CRUD and user authentication. The application makes use of the movie database API (Imdb).
@@ -17,7 +14,8 @@ A movie web app built with Flask using the IMDB API with CRUD and user authentic
 Here are the features in summary:
 * App displays existing list of users with registration option.
 * User can login and use CRUD features.
-* Canot access other user's list of movies.
+* Cannot access other user's list of movies.
+* Hover on Logo to go to main page
 
 ## Technologies Used
 
