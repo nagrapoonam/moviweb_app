@@ -7,7 +7,7 @@
 
 ###  A movie Web  application.
 
-[video.mp4](..%2F..%2F..%2FDownloads%2Fvideo.mp4)
+[video.mp4](Preview%2Fvideo.mp4)
 
 
 ### Description
