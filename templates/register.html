@@ -32,24 +32,30 @@
 </nav>
 
     <h1>Register</h1>
-<!--    {% with messages = get_flashed_messages() %}-->
-<!--        {% if messages %}-->
-<!--            <ul class="flash-messages">-->
-<!--                {% for message in messages %}-->
-<!--                    <li class="{{ message[0] }}">{{ message[1] }}</li>-->
-<!--                {% endfor %}-->
-<!--            </ul>-->
-<!--        {% endif %}-->
-<!--    {% endwith %}-->
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                    <li class="{{ message[0] }}">{{ message[1] }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     <form method="POST" action="{{ url_for('register') }}">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" name="username" class="form-control" required>
         <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="password" class="form-control" required>
         <br>
-        <!-- Add additional form fields here as needed -->
-        <input type="submit" value="Register">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
     </form>
+
+
+
 </body>
 </html>

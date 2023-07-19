@@ -53,17 +53,19 @@
 {% endwith %}
 
 
-
         <form method="POST" action="{{ url_for('login') }}">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+        <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" name="username" class="form-control" required>
+        <br>
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="password" class="form-control" required>
+        <br>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
 
-            <button type="submit">Login</button>
-        </form>
-<!--        <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>-->
-<!--    </div>-->
+
 </body>
 </html>

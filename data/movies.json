@@ -7,7 +7,7 @@
             "1": {
                 "name": "Silo",
                 "director": "N/A",
-                "year": "2016",
+                "year": "2017",
                 "rating": "8.1",
                 "poster": "https://m.media-amazon.com/images/M/MV5BNTk3MGJkZGItNzRjYy00MDhiLWExMjUtOWU2Njc3YWRmOWE3XkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_SX300.jpg"
             },
@@ -66,6 +66,13 @@
                 "year": "2018\u20132023",
                 "rating": "8.7",
                 "poster": "https://m.media-amazon.com/images/M/MV5BOGFiZjU5NGEtNTAwNS00ZjI2LTg0YTktNjg0ODFlM2E0NGVhXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg"
+            },
+            "10": {
+                "name": "X",
+                "director": "Ti West",
+                "year": "2022",
+                "rating": "6.6",
+                "poster": "https://m.media-amazon.com/images/M/MV5BMTJiMmE5YWItOWZjYS00YTg0LWE0MTYtMzg2ZTY4YjNkNDEzXkEyXkFqcGdeQXVyMTAzMDg4NzU0._V1_SX300.jpg"
             }
         }
     },

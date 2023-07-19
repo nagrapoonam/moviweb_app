@@ -1,13 +1,17 @@
-import json
-import requests
+import json, requests
+# importing for working with JSON data and making HTTP requests to external resources
 from datamanager.data_manager_interface import DataManagerInterface
-
+#implementing the methods
 
 class JSONDataManager:
     def __init__(self, filename):
+        """ Takes a filename parameter and initializes the self.filename attribute with the provided value
+        """
         self.filename = filename
 
     def get_all_users(self):
+        """ reads the JSON file, extracts the user data, and returns a list of user dictionaries
+        """
         try:
             with open(self.filename, "r") as json_file:
                 data = json.load(json_file)
@@ -27,33 +31,11 @@ class JSONDataManager:
             # ...
             return []
 
-    def get_user_movies(self, user_id):
-        try:
-            with open(self.filename, "r") as json_file:
-                data = json.load(json_file)
-                user_info = data.get(str(user_id))
-                if user_info:
-                    user_movies = user_info.get("movies", {})
-                    movies = []
-                    for movie_id, movie_info in user_movies.items():
-                        movie = {
-                            'id': movie_id,
-                            'name': movie_info['name'],
-                            'director': movie_info['director'],
-                            'year': movie_info['year'],
-                            'rating': movie_info['rating']
-                        }
-                        movies.append(movie)
-                    return movies
-                else:
-                    return []
-        except IOError as e:
-            # Handle the IOError exception
-            # ...
-            return []
-
 
     def add_user(self, username, password):
+        """ Checks if the username already exists. Otherwise, generates a unique user ID,
+         and adds the user's information
+         """
         try:
             with open(self.filename, "r+") as json_file:
                 data = json.load(json_file)
@@ -76,6 +58,10 @@ class JSONDataManager:
             return f"An error occurred while adding a user"
 
     def add_movie(self, user_id, movie_name):
+        """Adds a new movie to a user's movie list.
+        It uses the OMDB API to fetch additional movie information based on the movie name,
+        checks if the movie exists in the API response,
+        adds the movie information to the user's movies."""
         try:
             api_url = f"http://www.omdbapi.com/?apikey=4bf81bd7&t&t={movie_name}"
             response = requests.get(api_url)
@@ -107,13 +93,15 @@ class JSONDataManager:
 
                     return f"Movie '{movie_name}' added for user {user_info['name']} successfully."
 
-            return f"User with ID {user_id} not found."
+            return f"User with {user_info['name']} not found."
         except requests.RequestException as e:
             # Handle the RequestException
             # ...
             return f"An error occurred while adding the movie."
 
     def update_movie(self, user_id, movie_id, director, year, rating):
+        """Updates the information of movie for user in the JSON file.
+        Retrieves the user and movie information and updates provided fields"""
         try:
             user_id = str(user_id)
             movie_id = str(movie_id)
@@ -144,6 +132,8 @@ class JSONDataManager:
             return f"An error occurred while updating the movie."
 
     def delete_movie(self, user_id, movie_id):
+        """Deletes movie from user's movie list in the JSON file.
+         Retrieves the user and movie information, deletes the movie from the user's movies"""
         try:
             user_id = str(user_id)
             movie_id = str(movie_id)
@@ -168,6 +158,7 @@ class JSONDataManager:
             return f"An error occurred while deleting the movie."
 
     def get_user(self, user_id):
+        """Gets the information of a user from the JSON file based on the user ID. """
         try:
             user_id = str(user_id)
 
@@ -180,6 +171,7 @@ class JSONDataManager:
             return None
 
     def get_user_by_username(self, username):
+        """Gets the information of user from the JSON file based on the username. """
         try:
             with open(self.filename, "r") as json_file:
                 data = json.load(json_file)
@@ -192,6 +184,7 @@ class JSONDataManager:
             return None
 
     def get_movie(self, user_id, movie_id):
+        """Gets the information of  movie from a user's movie list in the JSON file. """
         try:
             user_id = str(user_id)
             movie_id = str(movie_id)
