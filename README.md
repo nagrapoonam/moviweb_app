@@ -5,37 +5,32 @@
 
 ### ✨ [Demo](https://movie-app95.herokuapp.com/)
 
-## Bult with
+###  A movie Web  application.
 
-* [Flask]() - Microframework
-* OMDBapi - Api for Movie
-* HTML - Markup Language
-* CSS & Bootstrap -  UI & Styling
-* Js & Jquery - More interactive & functionality
-
-###  A movie watchlist application.
-![alt text](app.gif)
-
-![](./assets/screenshots/homeonandroid.png)
-![](./assets/screenshots/resultsonmobile.png)
-
-![](./assets/screenshots/resultsondesktop.png)
-
-![img_2.png](img_2.png)
+pictures
+gif
 
 
 ### Description
-A watch-list app built with Flask using the TMDB API with CRUD and user authentication. The application makes use of the movie database API (tmdb).
+A movie web app built with Flask using the IMDB API with CRUD and user authentication. The application makes use of the movie database API (Imdb).
 
 ### Features
 Here are the features in summary:
-* App displays popular movies, upcoming movies and latest movies
-* User can search and review any movie.
+* App displays existing list of users with registration option.
+* User can login and use CRUD features
 
 ## Technologies Used
-* Python 3.7.4
-* Flask 1.1.1
+
+* [Flask]() - Microframework
+* Python 
+* OMDBapi - Api for Movie
 * HTML  
 * CSS
-* PostgreSQL
-* Bootstrap 3.3.7
+* Bootstrap 
+
+
+
+
+
+
+

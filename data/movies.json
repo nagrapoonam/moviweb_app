@@ -7,7 +7,7 @@
             "1": {
                 "name": "Silo",
                 "director": "N/A",
-                "year": "2017",
+                "year": "2019",
                 "rating": "8.1",
                 "poster": "https://m.media-amazon.com/images/M/MV5BNTk3MGJkZGItNzRjYy00MDhiLWExMjUtOWU2Njc3YWRmOWE3XkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_SX300.jpg"
             },
@@ -280,37 +280,9 @@
         }
     },
     "8": {
-        "name": "123",
-        "username": "123",
-        "password": "147",
-        "movies": {
-            "1": {
-                "name": "Elemental",
-                "director": "Peter Sohn",
-                "year": "2023",
-                "rating": "7.5",
-                "poster": "https://m.media-amazon.com/images/M/MV5BZjYxYWVjMDMtZGRjZS00ZDE4LTk0OWUtMjUyOTI4MmYxNjgwXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_SX300.jpg"
-            },
-            "2": {
-                "name": "Mission Impossible",
-                "director": "Brian De Palma",
-                "year": "1996",
-                "rating": "7.2",
-                "poster": "https://m.media-amazon.com/images/M/MV5BMTc3NjI2MjU0Nl5BMl5BanBnXkFtZTgwNDk3ODYxMTE@._V1_SX300.jpg"
-            },
-            "3": {
-                "name": "Jury Duty",
-                "director": "N/A",
-                "year": "2023\u2013",
-                "rating": "8.4",
-                "poster": "https://m.media-amazon.com/images/M/MV5BOGI4NjI2YzMtMWYzNS00OTI4LTkwM2MtZTEzNDU2MDhhNTY0XkEyXkFqcGdeQXVyMTQzNTA5MzYz._V1_SX300.jpg"
-            }
-        }
-    },
-    "9": {
-        "name": "rat",
-        "username": "rat",
-        "password": "rat",
+        "name": "Mandy",
+        "username": "Mandy",
+        "password": "123",
         "movies": {}
     }
 }
